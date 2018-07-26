@@ -1,0 +1,15 @@
+{
+  "name": "benzibot",
+  "version": "1.0.0",
+  "description": "The Ultimate User Activity Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Devin Bradley Bolduc",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "sql": "^0.78.0"
+  }
+}
