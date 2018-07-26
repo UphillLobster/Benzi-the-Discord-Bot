@@ -10,6 +10,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "discord.js": "^11.3.2",
+    "mssql": "^4.1.0",
     "sql": "^0.78.0"
   }
 }
