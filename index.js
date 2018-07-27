@@ -5,8 +5,6 @@ const CLIENT = new Discord.Client();
 //checks if setup
 myfs.check();
 
-const PREFIX = myfs.getConfig().prefix;
-
 function makeArgs(message) {
 /*  var arr = message.split(' ');
   for (var word = 0; word <= arr.length - 1; word++) {
@@ -42,6 +40,8 @@ CLIENT.on('guildCreate', (guild) => {
 });
 
 CLIENT.on('message', async msg => {
+  const PREFIX = myfs.getServerConfig(msg.guild.id).prefix;
+
   //message must have prefix and sender not a bot
   if (!msg.content.startsWith(PREFIX) && !msg.author.bot)
     return;

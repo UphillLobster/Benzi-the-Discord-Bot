@@ -1,5 +1,4 @@
 {
-	"prefix" : "=",
 	"botstatus" : "discord.gg/addpermalink",
 	"serverconfigslocation" : "./serverdata",
 	"localeslocation" : "./locales",
