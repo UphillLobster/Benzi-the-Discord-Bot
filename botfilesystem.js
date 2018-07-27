@@ -1,7 +1,10 @@
 
 //format for exports is exports.functionname = function() { // some function }
 const fs = require('fs');
+const boterror = 'Error-Bbot : #';
 
+/* function that checks for the existance of several crucial files and
+directories for Benzi Bot to function properly */
 exports.check =  function(){
   //check if token.json exists
   try {
@@ -20,11 +23,30 @@ exports.check =  function(){
       console.error('Created the missing token file');
       process.exit(1);
     }else{
+      //finds an error that does not relate to the file
+      //prints the error number and details
+      console.log(boterror + err.errno);
       console.error(err);
     }
   }
-
-
+  //checks to make sure the serverData directory exists
+  try {
+    const serverfolder = fs.readdirSync('./Server Data/');
+  } catch (err) {
+    if (err.errno == -4058) {
+      //finds that the directory is non-existant
+      //creates the directory
+      fs.mkdirSync('./Server Data/');
+      //prints the process completion
+      console.error('Created the missing server data directory');
+      process.exit(2);
+    } else {
+      //finds an error that does not relate to the directory
+      //prints the error number and details
+      console.log(boterror + err.errno);
+      console.error(err);
+    }
+  }
   //if it reaches here it's all good
   return true;
 }
@@ -34,14 +56,48 @@ exports.getToken = function(){
 }
 
 exports.getConfig = function(){
-  return JSON.parse(fs.readFileSync('./config.json'));
+  return JSON.parse(fs.readFileSync('./config.json'))
 }
 
 exports.createServerConfig = function (serverid){
-  //todo: create json file from server id
+  //object that formats the json file
+  var serverconfigbase = {
+    //Name of the server (FOR DIFFERENTIATION)
+    server_name : 'insert name here';
+    //Server Icon Link (STORED FOR IMAGE MANIPULATION)
+    server_icon : 'insert link here';
+    //Description of the Server (SET BY THE OWNER)
+    server_desc : 'insert description here';
+    //The preffered language of the user
+    locale : 'insert language';
+    //Command Prefix
+    prefix : '=';
+  }
+  //creates a new serverData folder
+  fs.writeFileSync('./Server Data/' + serverid, JSON.stringify(serverconfigbase));
+  //prints  the process completion
+  console.error('Created a Server Config File for server #' + serverid);
 }
 
 exports.getServerConfig = function(serverid){
   //todo: check if file exists and create it if not
   //todo: return server config object
+  try {
+    var serverconfig = fs.readFileSync('./Server Data/' + serverid);
+  } catch {
+    if (err.errno == -4058) {
+      //finds that the file is nonexistant
+      //calls the createServerConfig function to correct the error
+      myfs.createServerConfig(serverid);
+    } else {
+      //finds an error that does not relate to the file
+      //prints the error number and details
+      console.log(boterror + err.errno);
+      console.error(err);
+      return 0;
+    }
+  }
+  //returns the file data if it exists already
+  return JSON.parse(fs.readFileSync('./Server Data/' + serverid));
+
 }

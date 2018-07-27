@@ -5,13 +5,13 @@
 	"localeslocation" : "./locales",
 	"commandlist" : {
 		"FUNC_HELP" : {
-			"name" : "help",
+			"name" : "%NAME_HELP%",
 			"desc" : "%DESC_HELP%",
 			"examples" : ["",
 			"%NAME_PING%"]
 		},
 		"FUNC_PING" : {
-			"name" : "ping",
+			"name" : "%NAME_PING%",
 			"desc" : "%DESC_HELP%",
 			"examples" : [""]
 		}
