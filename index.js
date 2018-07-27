@@ -20,13 +20,49 @@ CLIENT.on('ready', () => {
 });
 
 CLIENT.on('message', async msg => {
-  if (!msg.content.startsWith(PREFIX))
+  //message must have prefix and sender not a bot
+  if (!msg.content.startsWith(PREFIX) && !msg.author.bot)
     return;
 
   const msgargs = makeArgs(msg.content);
 
   if(msgargs[0] === PREFIX + 'ping')
     await msg.channel.send(`Pong! Latency is ${CLIENT.ping}ms.`);
+
+  if(msgargs[0] === PREFIX + 'help'){
+    var commandlist = myfs.getConfig().commandlist;
+    if(msgargs.length > 1){
+      //asked abouta  specific command
+      //check if it exists
+      var result = null;
+      for(var command in commandlist){
+        if(commandlist[command].name === msgargs[1]){
+          result = commandlist[command];
+        }
+      }
+
+      //send result
+      if(result === null){
+        await msg.channel.send(`No such command exists.`);
+      }else{
+        await msg.channel.send(`Results sent to DM.`);
+        var helpmsg = `${result.name}: ${result.desc}\nexample(s):\n`;
+        for(var example in result.examples){
+          helpmsg+=`${PREFIX}${result.name} ${result.examples[example]}\n`;
+        }
+        await msg.author.send(helpmsg);
+      }
+
+    }else{
+      //list all without descriptions
+      await msg.channel.send(`Results sent to DM.`);
+      var helpmsg = '';
+      for(var command in commandlist){
+        helpmsg+=`${commandlist[command].name}\n`;
+      }
+      await msg.author.send(helpmsg);
+    }
+  }
 });
 
 CLIENT.login(myfs.getToken());
