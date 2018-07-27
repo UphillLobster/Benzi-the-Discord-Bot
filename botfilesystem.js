@@ -59,45 +59,50 @@ exports.getConfig = function(){
   return JSON.parse(fs.readFileSync('./config.json'))
 }
 
-exports.createServerConfig = function (serverid){
+function createServerConfig(serverid) {
   //object that formats the json file
   var serverconfigbase = {
     //Name of the server (FOR DIFFERENTIATION)
-    server_name : 'insert name here';
+    server_name : 'insert name here',
     //Server Icon Link (STORED FOR IMAGE MANIPULATION)
-    server_icon : 'insert link here';
+    server_icon : 'insert link here',
     //Description of the Server (SET BY THE OWNER)
-    server_desc : 'insert description here';
+    server_desc : 'insert description here',
     //The preffered language of the user
-    locale : 'insert language';
+    locale : 'insert language',
     //Command Prefix
-    prefix : '=';
+    prefix : '=',
   }
   //creates a new serverData folder
   fs.writeFileSync('./Server Data/' + serverid, JSON.stringify(serverconfigbase));
   //prints  the process completion
-  console.error('Created a Server Config File for server #' + serverid);
+  console.log('Created a Server Config File for server #' + serverid);
 }
 
 exports.getServerConfig = function(serverid){
-  //todo: check if file exists and create it if not
-  //todo: return server config object
   try {
     var serverconfig = fs.readFileSync('./Server Data/' + serverid);
-  } catch {
+  } catch (err) {
     if (err.errno == -4058) {
       //finds that the file is nonexistant
       //calls the createServerConfig function to correct the error
-      myfs.createServerConfig(serverid);
+      createServerConfig(serverid);
     } else {
       //finds an error that does not relate to the file
       //prints the error number and details
       console.log(boterror + err.errno);
       console.error(err);
-      return 0;
+      return null;
     }
   }
   //returns the file data if it exists already
   return JSON.parse(fs.readFileSync('./Server Data/' + serverid));
 
+}
+
+exports.editServerConfig = function(serverid, edit) {
+  //Edits the serverConfig
+  fs.writeFileSync('./Server Data/' + serverid, JSON.stringify(edit));
+  //prints the process completion
+  console.log('Modified the Server Config file for server #' + serverid);
 }

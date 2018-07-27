@@ -14,9 +14,20 @@ function makeArgs(message) {
   } THIS IS FOR TESTING THE PARSERS FUNCTIONALITY*/
   return message.split(' ');
 }
+//function that returns the argument in the proper variable type
+function convertArgs(arg) {
+  if(isNaN(arg)) {
+    //Finds that the argument is a string and spits it back out
+    return arg;
+  } else {
+    //Finds that the argument is a number and returns it as a number
+    return parseFloat(arg);
+  }
+}
 
 CLIENT.on('ready', () => {
   console.log(`Logged in as ${CLIENT.user.tag}!`);
+  myfs.getServerConfig(220);
 });
 
 CLIENT.on('message', async msg => {
