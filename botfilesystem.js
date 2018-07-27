@@ -12,7 +12,7 @@ exports.check =  function(){
       //file missing so create it then fail
       //object to make json
       var tokentempobj = {
-        token : ''
+        token : 'replaceme'
       }
       //make file
       fs.writeFileSync('./token.json', JSON.stringify(tokentempobj));
@@ -24,7 +24,6 @@ exports.check =  function(){
     }
   }
 
-  //check if we have a config
 
   //if it reaches here it's all good
   return true;
@@ -32,4 +31,17 @@ exports.check =  function(){
 
 exports.getToken = function(){
   return JSON.parse(fs.readFileSync('./token.json')).token;
+}
+
+exports.getConfig = function(){
+  return JSON.parse(fs.readFileSync('./config.json'))
+}
+
+exports.createServerConfig = function (serverid){
+  //todo: create json file from server id
+}
+
+exports.getServerConfig = function(serverid){
+  //todo: check if file exists and create it if not
+  //todo: return server config object
 }
