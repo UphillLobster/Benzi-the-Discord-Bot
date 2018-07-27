@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+# ingnore the token file
+token.json
+
+# ignore all server data
+serverdata/
