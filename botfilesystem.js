@@ -62,13 +62,13 @@ function createServerConfig(serverid) {
   //object that formats the json file
   var serverconfigbase = {
     //Name of the server (FOR DIFFERENTIATION)
-    server_name : 'insert name here',
+    name : 'insert name here',
     //Server Icon Link (STORED FOR IMAGE MANIPULATION)
-    server_icon : 'insert link here',
+    iconurl : 'insert link here',
     //Description of the Server (SET BY THE OWNER)
-    server_desc : 'insert description here',
+    desc : 'insert description here',
     //The preffered language of the user
-    locale : 'insert language',
+    locale : 'English',
     //Command Prefix
     prefix : '=',
   }
@@ -102,7 +102,7 @@ exports.getServerConfig = function(serverid){
 
 }
 
-exports.editServerConfig = function(serverid, obh) {
+exports.setServerConfig = function(serverid, obj) {
   //Edits the serverConfig
   fs.writeFileSync(exports.getConfig().serverconfigslocation+'/' + serverid+'.json', JSON.stringify(obj));
   //prints the process completion

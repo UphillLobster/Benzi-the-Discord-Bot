@@ -27,7 +27,18 @@ function convertArgs(arg) {
 
 CLIENT.on('ready', () => {
   console.log(`Logged in as ${CLIENT.user.tag}!`);
-  myfs.getServerConfig(220);
+});
+
+CLIENT.on('guildCreate', (guild) => {
+  //create a config
+  var serverdata = myfs.getServerConfig(guild.id);
+
+  //modify the data
+  serverdata.name = guild.name;
+  serverdata.iconurl = guild.iconURL;
+
+  myfs.setServerConfig(guild.id, serverdata);
+
 });
 
 CLIENT.on('message', async msg => {
