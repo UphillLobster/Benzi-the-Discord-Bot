@@ -34,7 +34,7 @@ exports.getToken = function(){
 }
 
 exports.getConfig = function(){
-  return JSON.parse(fs.readFileSync('./config.json'))
+  return JSON.parse(fs.readFileSync('./config.json'));
 }
 
 exports.createServerConfig = function (serverid){
