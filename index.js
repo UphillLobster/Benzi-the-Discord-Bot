@@ -1,14 +1,25 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const CLIENT = new Discord.Client();
+const PREFIX = '=';
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+CLIENT.on('ready', () => {
+  console.log(`Logged in as ${CLIENT.user.tag}!`);
 });
 
-client.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('Feature not currently available');
-  }
+CLIENT.on('message', async msg => {
+  if (!msg.content.startsWith(PREFIX))
+    return;
+  if(msg.content.startsWith(PREFIX + 'ping'))
+    msg.channel.send(`Latency is ${CLIENT.ping}ms`);
 });
 
-client.login('NDYzMDIwMDM1MzI2MzQ1MjE2.Djum8g.uMMxdFKPZBw0TicZtalXTJ5rBX8');
+function simpleParse(message) {
+/*  var arr = message.split(' ');
+  for (var word = 0; word <= arr.length - 1; word++) {
+    console.log(arr[word]);
+  } THIS IS FOR TESTING THE PARSERS FUNCTIONALITY*/
+  return message.split(' ');
+}
+
+
+CLIENT.login('NDYzMDIwMDM1MzI2MzQ1MjE2.Djum8g.uMMxdFKPZBw0TicZtalXTJ5rBX8');
