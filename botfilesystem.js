@@ -31,15 +31,14 @@ exports.check =  function(){
   }
   //checks to make sure the serverData directory exists
   try {
-    const serverfolder = fs.readdirSync('./Server Data/');
+    const serverfolder = fs.readdirSync(exports.getConfig().serverconfigslocation + '/');
   } catch (err) {
     if (err.errno == -4058) {
       //finds that the directory is non-existant
       //creates the directory
-      fs.mkdirSync('./Server Data/');
+      fs.mkdirSync(exports.getConfig().serverconfigslocation + '/');
       //prints the process completion
-      console.error('Created the missing server data directory');
-      process.exit(2);
+      console.error('Created the server data directory');
     } else {
       //finds an error that does not relate to the directory
       //prints the error number and details
@@ -74,19 +73,22 @@ function createServerConfig(serverid) {
     prefix : '=',
   }
   //creates a new serverData folder
-  fs.writeFileSync('./Server Data/' + serverid, JSON.stringify(serverconfigbase));
+  fs.writeFileSync(exports.getConfig().serverconfigslocation + '/' + serverid  + '.json', JSON.stringify(serverconfigbase));
   //prints  the process completion
   console.log('Created a Server Config File for server #' + serverid);
 }
 
 exports.getServerConfig = function(serverid){
+  var serverconfig = null;
+
   try {
-    var serverconfig = fs.readFileSync('./Server Data/' + serverid);
+    serverconfig = fs.readFileSync(exports.getConfig().serverconfigslocation + '/' + serverid + '.json');
   } catch (err) {
     if (err.errno == -4058) {
       //finds that the file is nonexistant
       //calls the createServerConfig function to correct the error
       createServerConfig(serverid);
+      serverconfig = fs.readFileSync(exports.getConfig().serverconfigslocation + '/' + serverid + '.json');
     } else {
       //finds an error that does not relate to the file
       //prints the error number and details
@@ -96,13 +98,13 @@ exports.getServerConfig = function(serverid){
     }
   }
   //returns the file data if it exists already
-  return JSON.parse(fs.readFileSync('./Server Data/' + serverid));
+  return JSON.parse(serverconfig);
 
 }
 
-exports.editServerConfig = function(serverid, edit) {
+exports.editServerConfig = function(serverid, obh) {
   //Edits the serverConfig
-  fs.writeFileSync('./Server Data/' + serverid, JSON.stringify(edit));
+  fs.writeFileSync(exports.getConfig().serverconfigslocation+'/' + serverid+'.json', JSON.stringify(obj));
   //prints the process completion
   console.log('Modified the Server Config file for server #' + serverid);
 }
