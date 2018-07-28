@@ -11,7 +11,7 @@
 		},
 		"FUNC_PING" : {
 			"name" : "%~@NAME_PING%~@",
-			"desc" : "%~@DESC_HELP%~@",
+			"desc" : "%~@DESC_PING%~@",
 			"examples" : [""]
 		}
 	}
