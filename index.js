@@ -25,6 +25,7 @@ function convertArgs(arg) {
 
 CLIENT.on('ready', () => {
   console.log(`Logged in as ${CLIENT.user.tag}!`);
+  CLIENT.user.setActivity(myfs.getConfig().botstatus, { type: 'WATCHING' });
 });
 
 CLIENT.on('guildCreate', (guild) => {
