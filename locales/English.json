@@ -1,0 +1,6 @@
+{
+	"NAME_HELP" : "help",
+	"DESC_HELP" : "Gets command information.",
+	"NAME_PING" : "ping",
+	"DESC_PING" : "Tells the bot's latency."
+}

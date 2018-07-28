@@ -4,14 +4,14 @@
 	"localeslocation" : "./locales",
 	"commandlist" : {
 		"FUNC_HELP" : {
-			"name" : "%NAME_HELP%",
-			"desc" : "%DESC_HELP%",
+			"name" : "%~@NAME_HELP%~@",
+			"desc" : "%~@DESC_HELP%~@",
 			"examples" : ["",
-			"%NAME_PING%"]
+			"%~@NAME_PING%~@"]
 		},
 		"FUNC_PING" : {
-			"name" : "%NAME_PING%",
-			"desc" : "%DESC_HELP%",
+			"name" : "%~@NAME_PING%~@",
+			"desc" : "%~@DESC_HELP%~@",
 			"examples" : [""]
 		}
 	}

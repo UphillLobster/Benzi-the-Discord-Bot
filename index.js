@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const myfs = require("./botfilesystem.js");
+const loc = require("./locales.js");
 const CLIENT = new Discord.Client();
 
 //checks if setup
@@ -21,6 +22,11 @@ function convertArgs(arg) {
     //Finds that the argument is a number and returns it as a number
     return parseFloat(arg);
   }
+}
+
+//function that takes a string an server config to make macro string
+function fixString(str, id){
+  return loc.replacetext(str, myfs.getServerConfig(id).locale);
 }
 
 CLIENT.on('ready', () => {
@@ -51,7 +57,10 @@ CLIENT.on('message', async msg => {
     return;
   }
 
-  const PREFIX = myfs.getServerConfig(msg.guild.id).prefix;
+  const config = myfs.getConfig();
+  const svConfig = myfs.getServerConfig(msg.guild.id);
+
+  const PREFIX = svConfig.prefix;
 
   //message must have prefix
   if (!msg.content.startsWith(PREFIX))
@@ -59,17 +68,18 @@ CLIENT.on('message', async msg => {
 
   const msgargs = makeArgs(msg.content);
 
-  if(msgargs[0] === PREFIX + 'ping')
+  //load command name from the locale file
+  if(msgargs[0] === PREFIX + fixString(config.commandlist.FUNC_PING.name, msg.guild.id))
     await msg.channel.send(`Pong! Latency is ${CLIENT.ping}ms.`);
 
-  if(msgargs[0] === PREFIX + 'help'){
-    var commandlist = myfs.getConfig().commandlist;
+  if(msgargs[0] === PREFIX + fixString(config.commandlist.FUNC_HELP.name, msg.guild.id)){
+    var commandlist = config.commandlist;
     if(msgargs.length > 1){
       //asked abouta  specific command
       //check if it exists
       var result = null;
       for(var command in commandlist){
-        if(commandlist[command].name === msgargs[1]){
+        if(fixString(commandlist[command].name, msg.guild.id) === msgargs[1]){
           result = commandlist[command];
         }
       }
@@ -79,9 +89,9 @@ CLIENT.on('message', async msg => {
         await msg.channel.send(`No such command exists.`);
       }else{
         await msg.channel.send(`Results sent to DM.`);
-        var helpmsg = `${result.name}: ${result.desc}\nexample(s):\n`;
+        var helpmsg = `${fixString(result.name, msg.guild.id)}: ${fixString(result.desc,msg.guild.id)}\nexample(s):\n`;
         for(var example in result.examples){
-          helpmsg+=`${PREFIX}${result.name} ${result.examples[example]}\n`;
+          helpmsg+=`${PREFIX}${fixString(result.name, msg.guild.id)} ${fixString(result.examples[example], msg.guild.id)}\n`;
         }
         await msg.author.send(helpmsg);
       }
@@ -91,7 +101,7 @@ CLIENT.on('message', async msg => {
       await msg.channel.send(`Results sent to DM.`);
       var helpmsg = '';
       for(var command in commandlist){
-        helpmsg+=`${commandlist[command].name}\n`;
+        helpmsg+=`${fixString(commandlist[command].name, msg.guild.id)}\n`;
       }
       await msg.author.send(helpmsg);
     }

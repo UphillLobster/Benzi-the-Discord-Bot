@@ -108,3 +108,16 @@ exports.setServerConfig = function(serverid, obj) {
   //prints the process completion
   console.log('Modified the Server Config file for server #' + serverid);
 }
+
+exports.getLocale = function(language){
+  var locale = null;
+
+  try {
+    locale= fs.readFileSync(exports.getConfig().localeslocation + '/' + language + '.json');
+  } catch (err) {
+    //failed
+    return null;
+  }
+  //returns the file data if it exists already
+  return JSON.parse(locale);
+}
