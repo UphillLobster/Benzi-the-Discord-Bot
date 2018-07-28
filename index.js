@@ -41,10 +41,20 @@ CLIENT.on('guildCreate', (guild) => {
 });
 
 CLIENT.on('message', async msg => {
+  //deny bot messages
+  if(msg.author.bot) return;
+
+  if(!msg.guild){
+    //somebody sent a DM to the bot
+    console.log(`${msg.author.tag} attempted to DM the bot`);
+    await msg.channel.send("Direct messaging isn't supported at the moment.");
+    return;
+  }
+
   const PREFIX = myfs.getServerConfig(msg.guild.id).prefix;
 
-  //message must have prefix and sender not a bot
-  if (!msg.content.startsWith(PREFIX) && !msg.author.bot)
+  //message must have prefix
+  if (!msg.content.startsWith(PREFIX))
     return;
 
   const msgargs = makeArgs(msg.content);
