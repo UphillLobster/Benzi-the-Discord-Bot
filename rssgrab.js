@@ -20,7 +20,7 @@ exports.getWebpageContents = async function(uri){
 
 const dif = 48;
 //gets all humble bundle deals in last dif hours (that's usually how long free games last)
-async function getHumbleBundleRss(){
+exports.getHumbleBundleRss = async function(){
   //parse its xml
   var humblebundlerss = parser.parse(await exports.getWebpageContents(hbwebsite));
 
@@ -45,8 +45,16 @@ async function getHumbleBundleRss(){
   return returnItems;
 }
 
-async function test(){
-  console.log(await getHumbleBundleRss());
-}
+//return any free game deals
+exports.getFreeHumbleBundleGame = async function(){
+  var freeGames = [];
+  var items = await exports.getHumbleBundleRss();
 
-test();
+  for(var item in items){
+    if(items[item].category.includes("humble free game")){
+      freeGames.push(items[item]);
+    }
+  }
+
+  return freeGames;
+}

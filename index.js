@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const myfs = require("./botfilesystem.js");
 const loc = require("./locales.js");
+const rss = require("./rssgrab.js");
 const CLIENT = new Discord.Client();
 
 //checks if setup
@@ -105,6 +106,21 @@ CLIENT.on('message', async msg => {
       }
       await msg.author.send(helpmsg);
     }
+  }
+
+  if(msgargs[0] === PREFIX + fixString(config.commandlist.FUNC_HUMBLEBUNDLE.name, msg.guild.id)){
+    var deals = await rss.getHumbleBundleRss();
+
+    //format messages
+    var message = "Here are all the deals in the last 48 hours:\n";
+    for(var deal in deals){
+      var theDeal = deals[deal];
+
+      message += theDeal.link+'\n';
+    }
+
+    msg.channel.send('Results sent to DM.');
+    msg.author.send(message);
   }
 });
 

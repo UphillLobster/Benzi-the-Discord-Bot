@@ -2,5 +2,7 @@
 	"NAME_HELP" : "help",
 	"DESC_HELP" : "Gets command information.",
 	"NAME_PING" : "ping",
-	"DESC_PING" : "Tells the bot's latency."
+	"DESC_PING" : "Tells the bot's latency.",
+	"NAME_HUMBLE" : "humble",
+	"DESC_HUMBLE" : "Lists all humble bundle deals in the last 48 hours."
 }

@@ -13,6 +13,11 @@
 			"name" : "%~@NAME_PING%~@",
 			"desc" : "%~@DESC_PING%~@",
 			"examples" : [""]
+		},
+		"FUNC_HUMBLEBUNDLE" : {
+			"name" : "%~@NAME_HUMBLE%~@",
+			"desc" : "%~@DESC_HUMBLE%~@",
+			"examples" : [""]
 		}
 	}
 }
