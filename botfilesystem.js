@@ -1,11 +1,10 @@
-
 //format for exports is exports.functionname = function() { // some function }
 const fs = require('fs');
 const boterror = 'Error-Bbot : #';
 
 /* function that checks for the existance of several crucial files and
 directories for Benzi Bot to function properly */
-exports.check =  function(){
+exports.check = function(){
   //check if token.json exists
   try {
     const tokenfile = fs.readFileSync('./token.json');
@@ -107,4 +106,17 @@ exports.setServerConfig = function(serverid, obj) {
   fs.writeFileSync(exports.getConfig().serverconfigslocation+'/' + serverid+'.json', JSON.stringify(obj));
   //prints the process completion
   console.log('Modified the Server Config file for server #' + serverid);
+}
+
+exports.getLocale = function(language){
+  var locale = null;
+
+  try {
+    locale= fs.readFileSync(exports.getConfig().localeslocation + '/' + language + '.json');
+  } catch (err) {
+    //failed
+    return null;
+  }
+  //returns the file data if it exists already
+  return JSON.parse(locale);
 }

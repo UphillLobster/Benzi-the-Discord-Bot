@@ -1,0 +1,20 @@
+{
+	"NAME_HELP" : "help",
+	"DESC_HELP" : "Gets command information.",
+	"NAME_PING" : "ping",
+	"DESC_PING" : "Tells the bot's latency.",
+	"NAME_ROLL" : "roll",
+	"DESC_ROLL" : "Rolls a set number of dice each containing up to the number specified at the end",
+	"NAME_CREATERULES" : "createrules",
+	"DESC_CREATERULES" : "Creates a null version of the rules up to the number passed into the command",
+	"NAME_RULE" : "rule",
+	"DESC_RULE" : "Posts the details of the specified rule",
+	"NAME_SETRULE" : "setrule",
+	"DESC_SETRULE" : "Modifies the rule by its number",
+	"NAME_SETRULEDESC" : "setruledesc",
+	"DESC_SETRULEDESC" : "Sets the specifications and descriptions of the given rule",
+	"NAME_POSTRULES" : "rules",
+	"DESC_POSTRULES" : "Posts the complete formatted rules if it exists",
+	"NAME_HUMBLE" : "humble",
+	"DESC_HUMBLE" : "Lists all humble bundle deals in the last 48 hours."
+}
