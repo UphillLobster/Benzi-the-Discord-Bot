@@ -20,4 +20,54 @@
 			"examples" : [""]
 		}
 	}
+    "botstatus" : "discord.gg/BBbXWP4",
+    "serverconfigslocation" : "./serverdata",
+    "localeslocation" : "./locales",
+    "commandlist" : {
+        "FUNC_HELP" : {
+            "name" : "%~@NAME_HELP%~@",
+            "desc" : "%~@DESC_HELP%~@",
+						"examples" : ["", "%~@NAME_PING%~@"]
+        },
+        "FUNC_PING" : {
+            "name" : "%~@NAME_PING%~@",
+            "desc" : "%~@DESC_PING%~@",
+            "examples" : [""]
+        },
+        "FUNC_ROLL" : {
+            "name" : "%~@NAME_ROLL%~@",
+            "desc" : "%~@DESC_ROLL%~@",
+            "examples" : [""]
+        },
+        "FUNC_CREATERULES" : {
+            "name" : "%~@NAME_CREATERULES%~@",
+            "desc" : "%~@DESC_CREATRULES%~@",
+            "examples" : ["%~@NAME_CREATRULES%~@", "9", "Follow our Rules"]
+        },
+        "FUNC_RULE" : {
+            "name" : "%~@NAME_RULE%~@",
+            "desc" : "%~@DESC_RULE%~@",
+            "examples" : [""]
+        },
+        "FUNC_SETRULE" : {
+            "name" : "%~@NAME_SETRULE%~@",
+            "desc" : "%~@DESC_SETRULE%~@",
+            "examples" : [""]
+        },
+        "FUNC_SETRULEDESC" : {
+            "name" : "%~@NAME_SETRULEDESC%~@",
+            "desc" : "%~@DESC_SETRULEDESC%~@",
+            "examples" : [""]
+        },
+				"FUNC_POSTRULES" : {
+					"name" : "%~@NAME_POSTRULES%~@",
+					"desc" : "%~@DESC_POSTRULES%~@",
+					"examples" : [""]
+				},
+				"FUNC_HUMBLEBUNDLE" : {
+            "name" : "%~@NAME_HUMBLE%~@",
+            "desc" : "%~@DESC_HUMBLE%~@",
+            "examples" : [""]
+        }
+    }
 }

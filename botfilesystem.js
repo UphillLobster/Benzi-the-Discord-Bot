@@ -1,11 +1,10 @@
-
 //format for exports is exports.functionname = function() { // some function }
 const fs = require('fs');
 const boterror = 'Error-Bbot : #';
 
 /* function that checks for the existance of several crucial files and
 directories for Benzi Bot to function properly */
-exports.check =  function(){
+exports.check = function(){
   //check if token.json exists
   try {
     const tokenfile = fs.readFileSync('./token.json');
